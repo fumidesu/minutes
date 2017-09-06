@@ -1,0 +1,59 @@
+<div class="container">
+  <div class="col-md-6 col-md-offset-3 col-sm-10 col-sm-offset-1">
+    <h3>Confirm the below contents</h3>
+
+    <%= form_for(@minute) do |f| %>
+    <%= f.hidden_field :title %>
+    <%= f.hidden_field :date %>
+    <%= f.hidden_field :chairman %>
+    <%= f.hidden_field :department %>
+    <%= f.hidden_field :location %>
+    <%= f.hidden_field :participant %>
+    <%= f.hidden_field :absent %>
+    <%= f.hidden_field :cc %>
+    <%= f.hidden_field :agenda %>
+    <%= f.hidden_field :nummer %>
+    <%= f.hidden_field :subject %>
+    <%= f.hidden_field :action %>
+    <%= f.hidden_field :responsible %>
+    <%= f.hidden_field :duedate %>
+    <%= f.hidden_field :status %>
+
+    <p>Title:<%= @minute.title %></p>
+    <p>Date:<%= @minute.date %></p>
+    <p>Chairman:<%= @minute.chairman %></p>
+    <p>Department:<%= @minute.department %></p>
+    <p>Location:<%= @minute.location %></p>
+    <p>Participant:<%= @minute.participant %></p>
+    <p>Absent:<%= @minute.absent %></p>
+    <p>cc:<%= @minute.cc %></p>
+    <p>agenda:<%= @minute.agenda %></p>
+    <p>number:<%= @minute.nummer %></p>
+    <p>Subject:<%= @minute.subject %></p>
+    <p>Action:<%= @minute.action %></p>
+    <p>Responsible:<%= @minute.responsible %></p>
+    <p>Due Date:<%= @minute.duedate %></p>
+    <p>Status:<%= @minute.status %></p>
+    <%= f.submit "Confirm and submit",class: 'btn btn-primary btn-block' %>
+  <% end %>
+
+  <%= form_for(@minute, url: new_minute_path, method: 'get') do |f| %>
+      <%= f.hidden_field :title %>
+      <%= f.hidden_field :date %>
+      <%= f.hidden_field :chairman %>
+      <%= f.hidden_field :department %>
+      <%= f.hidden_field :location %>
+      <%= f.hidden_field :participant %>
+      <%= f.hidden_field :absent %>
+      <%= f.hidden_field :cc %>
+      <%= f.hidden_field :agenda %>
+      <%= f.hidden_field :nummer %>
+      <%= f.hidden_field :subject %>
+      <%= f.hidden_field :action %>
+      <%= f.hidden_field :responsible %>
+      <%= f.hidden_field :duedate %>
+      <%= f.hidden_field :status %>
+      <%= f.submit "Back", name:'back', class: 'btn btn-default btn-block' %>
+    <% end %>
+  </div>
+</div>

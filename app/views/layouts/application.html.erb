@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meeting</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <header>
+    <ul>
+  <li><%= link_to "Top Page", root_path %></li>
+  <li><%= link_to "Meeting Minutes", new_minute_path %></li>
+  <li><%= link_to "To Do List", root_path %></li>
+</ul>
+
+  </header>
+<%= yield %>
+
+<footer>
+    <p>Created by Sauer</p>
+    <p>© 2015-2016 Copyright Sauer</p>
+  </footer>
+
+
+</body>
+</html>

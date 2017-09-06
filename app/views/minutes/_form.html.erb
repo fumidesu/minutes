@@ -1,0 +1,65 @@
+<%= form_for(@minute, url: choose_new_or_edit) do |f| %>
+  <% if @minute.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @minute.errors.count %> error(s) to be corrected</h2>
+
+      <ul>
+      <% @minute.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= f.label :title %>
+<%= f.text_field :title, class: 'form-control' %>
+<br>
+<%= f.label :date %>
+<%= f.text_field :date, class: 'form-control' %>
+<br>
+<%= f.label :chairman %>
+<%= f.text_field :chairman, class: 'form-control' %>
+<br>
+<%= f.label :department %>
+<%= f.text_field :department, class: 'form-control' %>
+<br>
+<%= f.label :location %>
+<%= f.text_field :location, class: 'form-control' %>
+<br>
+<%= f.label :participant %>
+<%= f.text_field :participant, class: 'form-control' %>
+<br>
+<%= f.label :absent %>
+<%= f.text_field :absent, class: 'form-control' %>
+<br>
+<%= f.label :cc %>
+<%= f.text_field :cc, class: 'form-control' %>
+<br>
+<%= f.label :agenda %>
+<%= f.text_field :agenda, class: 'form-control' %>
+<br>
+<%= f.label :number %>
+<%= f.text_field :nummer, class: 'form-control' %>
+<br>
+<%= f.label :subject %>
+<%= f.text_field :subject, class: 'form-control' %>
+<br>
+<%= f.label :actopm %>
+<%= f.text_field :action, class: 'form-control' %>
+<br>
+<%= f.label :responsible %>
+<%= f.text_field :responsible, class: 'form-control' %>
+<br>
+<%= f.label :due_date %>
+<%= f.text_field :duedate, class: 'form-control' %>
+<br>
+<%= f.label :status %>
+<%= f.text_field :status, class: 'form-control' %>
+<br>
+
+<%= f.submit 'Submit', class: 'btn btn-primary btn-block' %>
+<%= link_to "Save", store_minutes_path %>
+
+<% end %>
+
+<%= link_to "Return Meeting Minute Overview Page", minutes_path %>

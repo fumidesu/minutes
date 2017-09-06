@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="wrapper col-md-8 col-md-offset-2 col-sm-10">
+    <p><%= notice %></p>
+    <h1>Submitted Meeting Minutes List</h1>
+    <% @minutes.each do |minute| %>
+    <div class="row">
+      <h4><strong><%= minute.title %></strong></h4>
+      </div>
+    <% end %>
+    <%= link_to "Create the new meeting minutes", new_minute_path, class: 'btn btn-default btn-sm btn-success' %>
+  </div>
+</div>
+
+<div id="page-top-btn" class="page-top-btn">
+    <p><a class="move-page-top" id="move-page-top">▲</a></p>
+</div>

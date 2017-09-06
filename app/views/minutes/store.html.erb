@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="wrapper col-md-8 col-md-offset-2 col-sm-10">
+    <p><%= notice %></p>
+    <h1>Saved Meeting Minutes List</h1>
+    <% @minutes.each do |minute| %>
+    <div class="row">
+      <h4><strong><%= minute.title %></strong></h4>
+        <%= link_to "Correct these minutes", edit_minute_path(minute.id), class: 'btn btn-default btn-sm btn-success' %>
+        <%= link_to 'Delete these minutes', minute_path(minute.id), method: :delete, data: { confirm: 'Are you sure to delete?' }, class: 'btn btn-default btn-sm btn-success' %>
+      </div>
+    <% end %>
+    <%= link_to "Create the new meeting minutes", new_minute_path, class: 'btn btn-default btn-sm btn-success' %>
+  </div>
+</div>
+
+<div id="page-top-btn" class="page-top-btn">
+    <p><a class="move-page-top" id="move-page-top">▲</a></p>
+</div>
