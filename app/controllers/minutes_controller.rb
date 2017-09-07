@@ -1,4 +1,5 @@
 class MinutesController < ApplicationController
+  before_action :authenticate_user!
 before_action :set_minute, only: [:edit, :update, :destroy]
 
   def index

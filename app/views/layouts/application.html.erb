@@ -14,6 +14,16 @@
   <li><%= link_to "Top Page", root_path %></li>
   <li><%= link_to "Meeting Minutes", new_minute_path %></li>
   <li><%= link_to "To Do List", root_path %></li>
+  <% if user_signed_in? %>
+  <li><%= link_to 'Change your password', edit_user_registration_path %>
+  </li>
+    <li><%= link_to 'Log out', destroy_user_session_path, method: :delete %></li>
+  <% else %>
+    <li><%= link_to 'Log in', new_user_session_path  %></li>
+
+  <% end %>
+
+
 </ul>
 
   </header>
@@ -21,7 +31,7 @@
 
 <footer>
     <p>Created by Sauer</p>
-    <p>© 2015-2016 Copyright Sauer</p>
+    <p>© 2017 Copyright Sauer</p>
   </footer>
 
 
