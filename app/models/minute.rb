@@ -12,4 +12,5 @@ class Minute < ActiveRecord::Base
    validates :responsible, presence: true
    validates :duedate, presence: true
    validates :status, presence: true
+   belongs_to :user
 end

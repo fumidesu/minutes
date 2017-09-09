@@ -3,4 +3,5 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, #:registerable,user登録が出来ない様にする
          :recoverable, :rememberable, :trackable, :validatable
+  has_many :minutes
 end

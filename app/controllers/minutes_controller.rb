@@ -21,6 +21,7 @@ before_action :set_minute, only: [:edit, :update, :destroy]
 
   def create
     @minute = Minute.create(minutes_params)
+    @minute.user_id = current_user.id
     if @minute.save
     redirect_to minutes_path, notice: "The minutes were created！"
     else
