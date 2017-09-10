@@ -1,4 +1,4 @@
-<%= form_for(@minute, url: choose_new_or_edit) do |f| %>
+<%= form_for(@minute) do |f| %>
   <% if @minute.errors.any? %>
     <div id="error_explanation">
       <h2><%= @minute.errors.count %> error(s) to be corrected</h2>
@@ -44,7 +44,7 @@
 <%= f.label :subject %>
 <%= f.text_field :subject, class: 'form-control' %>
 <br>
-<%= f.label :actopm %>
+<%= f.label :action %>
 <%= f.text_field :action, class: 'form-control' %>
 <br>
 <%= f.label :responsible %>

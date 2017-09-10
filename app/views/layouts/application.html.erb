@@ -12,7 +12,17 @@
   <header>
     <ul>
   <li><%= link_to "Top Page", root_path %></li>
-  <li><%= link_to "Meeting Minutes", new_minute_path %></li>
+  <li class="dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Meeting Minutes <span class="caret"></span></a>
+
+    <ul class="dropdown-menu">
+      <li><%= link_to "Create", new_minute_path %></li>
+      <li><%= link_to "Edit, Delete or Submit", store_minutes_path %></li>
+      <li><%= link_to "Submitted Minutes", minutes_path %></li>
+    </ul>
+  </li>
+
+  <!-- <li><%#= link_to "Meeting Minutes", new_minute_path %></li> -->
   <li><%= link_to "To Do List", root_path %></li>
   <% if user_signed_in? %>
   <li><%= link_to 'Change your password', edit_user_registration_path %>

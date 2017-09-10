@@ -1,6 +1,6 @@
 class MinutesController < ApplicationController
   before_action :authenticate_user!
-before_action :set_minute, only: [:edit, :update, :destroy]
+  before_action :set_minute, only: [:edit, :update, :destroy]
 
   def index
     @minutes = Minute.all
@@ -23,7 +23,7 @@ before_action :set_minute, only: [:edit, :update, :destroy]
     @minute = Minute.create(minutes_params)
     @minute.user_id = current_user.id
     if @minute.save
-    redirect_to minutes_path, notice: "The minutes were created！"
+    redirect_to store_minutes_path, notice: "The minutes were saved！"
     else
       render 'new'
     end
