@@ -51,3 +51,8 @@ end
 gem 'twitter-bootstrap-rails'
 gem 'jquery-turbolinks'
 gem 'rails_12factor', group: :production
+gem 'wkhtmltopdf-binary'
+gem 'wicked_pdf'
+gem 'pry-rails'
+gem 'better_errors'
+gem 'rails_admin'

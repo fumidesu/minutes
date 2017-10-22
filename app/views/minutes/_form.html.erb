@@ -57,9 +57,8 @@
 <%= f.text_field :status, class: 'form-control' %>
 <br>
 
-<%= f.submit 'Submit', class: 'btn btn-primary btn-block' %>
-<%= link_to "Save", store_minutes_path %>
-
+<%= f.submit 'Save', class: 'btn btn-primary btn-block' %>
+<%= f.submit 'Submit', name: 'mail', class: 'btn btn-primary btn-block' %>
 <% end %>
 
 <%= link_to "Return Meeting Minute Overview Page", minutes_path %>
