@@ -11,6 +11,7 @@ Rails.application.routes.draw do
     collection do
       post :confirm
       get :store
+      get :pdf
     end
   end
 

@@ -6,6 +6,22 @@ class MinutesController < ApplicationController
     @minutes = Minute.all
   end
 
+def pdf
+  @minute = Minute.find(params[:minutes])
+  respond_to do |format|
+    format.pdf do
+      render pdf:  "title-#{Time.now.to_date.to_s}", template: 'minutes/show.html.erb'
+# render pdf: "title-#{Time.now.to_date.to_s}",
+#        encording: 'UTF-8',
+#        template: 'pdf/pdf.html.erb',
+#        layout: 'pdf.html',
+#        orientation: 'Landscape',
+#        page_size:   'A4',
+#        show_as_html: params[:debug].present?
+    end
+  end
+end
+
   def new
     if params[:back]
       @minute = Minute.new(minutes_params)
@@ -23,20 +39,32 @@ class MinutesController < ApplicationController
     @minute = Minute.create(minutes_params)
     @minute.user_id = current_user.id
     if @minute.save
-      if params[:mail]
+      if params[:minute][:mail]
          NoticeMailer.sendmail_minute(@minute).deliver
         respond_to do |format|
-          format.html
           format.pdf do
-            render pdf:          "pdffile",                        # ".pdf"拡張子は不要
-                  footer:       {   html: {   template: 'minutes/footer.html.erb' } }, # footer用のテンプレートファイル指定
-                  store_as_html: params[:debug].present?  # debugを有効にする
+            render pdf:  "title-#{Time.now.to_date.to_s}", template: 'minutes/store.pdf.erb'
+      # render pdf: "title-#{Time.now.to_date.to_s}",
+      #        encording: 'UTF-8',
+      #        template: 'pdf/pdf.html.erb',
+      #        layout: 'pdf.html',
+      #        orientation: 'Landscape',
+      #        page_size:   'A4',
+      #        show_as_html: params[:debug].present?
           end
         end
+        #  format.html { redirect_to :action => 'index', :format => 'pdf', debug: 1 }
+        #  format.pdf do
+        #    render pdf:          "pdffile",                        # ".pdf"拡張子は不要
+        #          footer:       {   html: {   template: 'minutes/footer.html.erb' } }, # footer用のテンプレートファイル指定
+        #          store_as_html: params[:debug].present?  # debugを有効にする
+        #  end
+        #end
         redirect_to minutes_path, notice: "The minutes were submitted！"
-      else
+        #redirect_to "pdf", minutes_path, notice: "The minutes were submitted!"
+        else
         redirect_to store_minutes_path, notice: "The minutes were saved！"
-      end
+        end
     else
       render 'new'
     end
@@ -44,19 +72,19 @@ class MinutesController < ApplicationController
 
   def store
     @minutes = Minute.all
+  end
 
 
     #@minute = Minute.create(minutes_params)
     #@minute.published = false
     #@minute.save
-  end
 
   def edit
   end
 
   def update
     if @minute.update(minutes_params)
-      redirect_to minutes_path, notice: "The minutes were updated!"
+      redirect_to store_minutes_path, notice: "The minutes were updated!"
 
 
     else
@@ -78,4 +106,5 @@ class MinutesController < ApplicationController
       def set_minute
            @minute = Minute.find(params[:id])
          end
+
 end

@@ -1,3 +1,3 @@
 WickedPdf.config = {
-  exe_path: '/home/vagrant/.rbenv/shims/wkhtmltopdf'
+  exe_path: "#{Gem.loaded_specs['wkhtmltopdf-binary'].full_gem_path}/bin/wkhtmltopdf"
 }
