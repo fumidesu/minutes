@@ -8,6 +8,8 @@ class MinutesController < ApplicationController
 
 def pdf
   @minute = Minute.find(params[:minutes])
+  @minute.save
+  #@minute = Minute.find(minutes_params)
   respond_to do |format|
     format.pdf do
       render pdf:  "title-#{Time.now.to_date.to_s}", template: 'minutes/show.html.erb'
@@ -38,12 +40,24 @@ end
   def create
     @minute = Minute.create(minutes_params)
     @minute.user_id = current_user.id
-    if @minute.save
-      if params[:minute][:mail]
-         NoticeMailer.sendmail_minute(@minute).deliver
+    if (params[:commit] == "Submit")
+      if @minute.save
         respond_to do |format|
           format.pdf do
-            render pdf:  "title-#{Time.now.to_date.to_s}", template: 'minutes/store.pdf.erb'
+            render pdf:  "title-#{Time.now.to_date.to_s}", template: 'minutes/show.html.erb'
+          end
+        end
+      else
+          render 'new'
+      end
+
+    else
+      if @minute.save
+      #if params[:minute][:mail]
+      #   NoticeMailer.sendmail_minute(@minute).deliver
+      #  respond_to do |format|
+      #    format.pdf do
+      #      render pdf:  "title-#{Time.now.to_date.to_s}", template: 'minutes/store.pdf.erb'
       # render pdf: "title-#{Time.now.to_date.to_s}",
       #        encording: 'UTF-8',
       #        template: 'pdf/pdf.html.erb',
@@ -51,8 +65,8 @@ end
       #        orientation: 'Landscape',
       #        page_size:   'A4',
       #        show_as_html: params[:debug].present?
-          end
-        end
+      #    end
+      #  end
         #  format.html { redirect_to :action => 'index', :format => 'pdf', debug: 1 }
         #  format.pdf do
         #    render pdf:          "pdffile",                        # ".pdf"拡張子は不要
@@ -60,15 +74,18 @@ end
         #          store_as_html: params[:debug].present?  # debugを有効にする
         #  end
         #end
-        redirect_to minutes_path, notice: "The minutes were submitted！"
-        #redirect_to "pdf", minutes_path, notice: "The minutes were submitted!"
-        else
         redirect_to store_minutes_path, notice: "The minutes were saved！"
-        end
-    else
-      render 'new'
-    end
+      #elsif @minute.submit
+        #redirect_to minutes_path, notice: "The minutes were submitted！"
+        #redirect_to "pdf", minutes_path, notice: "The minutes were submitted!"
+        #else
+        #redirect_to store_minutes_path, notice: "The minutes were saved！"
+        #end
+      else
+        render 'new'
+      end
   end
+end
 
   def store
     @minutes = Minute.all
@@ -84,13 +101,23 @@ end
 
   def update
     if @minute.update(minutes_params)
+      if (params[:commit] == "Submit")
+        if @minute.save
+          respond_to do |format|
+            format.pdf do
+              render pdf:  "title-#{Time.now.to_date.to_s}", template: 'minutes/show.html.erb'
+            end
+          end
+        end
+        else
+          if @minute.save
       redirect_to store_minutes_path, notice: "The minutes were updated!"
-
-
-    else
-      render 'edit'
-    end
-  end
+          else
+            render 'edit'
+          end
+        end
+      end
+    end 
 
   def destroy
     @minute.destroy
@@ -100,7 +127,7 @@ end
 
   private
       def minutes_params
-        params.require(:minute).permit(:title, :date, :chairman, :department, :location, :participant, :absent, :cc, :agenda, :nummer, :subject, :action, :responsible, :duedate, :status)
+        params.require(:minute).permit(:title, :date, :chairman, :department, :location, :participant, :absent, :cc, :agenda, :nummer, :subject, :action, :responsible, :duedate, :status, :mail)
       end
 
       def set_minute

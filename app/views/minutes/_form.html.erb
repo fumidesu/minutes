@@ -1,4 +1,4 @@
-<%= form_for(@minute) do |f| %>
+<%= form_for(@minute, format: "pdf") do |f| %>
   <% if @minute.errors.any? %>
     <div id="error_explanation">
       <h2><%= @minute.errors.count %> error(s) to be corrected</h2>
@@ -60,7 +60,8 @@
 <%= f.text_field :status, class: 'form-control' %>
 <br>
 
-<%= link_to "Submit", pdf_minutes_path(minutes:@minute, format: "pdf") %>
+<%#= link_to "Submit", pdf_minutes_path(minutes:@minute, format: "pdf") %>
+<%= f.submit 'Submit', format: "pdf", class: 'test btn btn-primary btn-block' %>
 <%= f.submit 'Save', class: 'btn btn-primary btn-block' %>
 <%#= f.submit 'Submit', name: 'mail', class: 'btn btn-primary btn-block' %>
 <% end %>
