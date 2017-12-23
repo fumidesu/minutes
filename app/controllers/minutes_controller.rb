@@ -6,24 +6,6 @@ class MinutesController < ApplicationController
     @minutes = Minute.all
   end
 
-def pdf
-  @minute = Minute.find(params[:minutes])
-  @minute.save
-  #@minute = Minute.find(minutes_params)
-  respond_to do |format|
-    format.pdf do
-      render pdf:  "title-#{Time.now.to_date.to_s}", template: 'minutes/show.html.erb'
-# render pdf: "title-#{Time.now.to_date.to_s}",
-#        encording: 'UTF-8',
-#        template: 'pdf/pdf.html.erb',
-#        layout: 'pdf.html',
-#        orientation: 'Landscape',
-#        page_size:   'A4',
-#        show_as_html: params[:debug].present?
-    end
-  end
-end
-
   def new
     if params[:back]
       @minute = Minute.new(minutes_params)
@@ -50,7 +32,6 @@ end
       else
           render 'new'
       end
-
     else
       if @minute.save
       #if params[:minute][:mail]
@@ -74,18 +55,18 @@ end
         #          store_as_html: params[:debug].present?  # debugを有効にする
         #  end
         #end
-        redirect_to store_minutes_path, notice: "The minutes were saved！"
+          redirect_to store_minutes_path, notice: "The minutes were saved！"
       #elsif @minute.submit
         #redirect_to minutes_path, notice: "The minutes were submitted！"
         #redirect_to "pdf", minutes_path, notice: "The minutes were submitted!"
         #else
         #redirect_to store_minutes_path, notice: "The minutes were saved！"
         #end
-      else
-        render 'new'
+        else
+          render 'new'
+        end
       end
-  end
-end
+    end
 
   def store
     @minutes = Minute.all
@@ -109,15 +90,15 @@ end
             end
           end
         end
+      else
+        if @minute.save
+            redirect_to store_minutes_path, notice: "The minutes were updated!"
         else
-          if @minute.save
-      redirect_to store_minutes_path, notice: "The minutes were updated!"
-          else
             render 'edit'
-          end
         end
       end
-    end 
+    end
+  end
 
   def destroy
     @minute.destroy

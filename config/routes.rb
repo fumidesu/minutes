@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  #get 'todos/index'
+  resources :todos, only: [:index, :new, :create, :edit, :update ,:destroy]
+
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   devise_for :users
   as :user do
@@ -11,7 +14,6 @@ Rails.application.routes.draw do
     collection do
       post :confirm
       get :store
-      get :pdf
     end
   end
 

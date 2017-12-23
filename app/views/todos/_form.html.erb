@@ -1,0 +1,33 @@
+<%= form_for(@todo) do |f| %>
+  <% if @todo.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= @todo.errors.count %> error(s) to be corrected</h2>
+
+      <ul>
+      <% @todo.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+<%= f.label :date %>
+<%= f.text_field :date, class: 'form-control' %>
+<br>
+<%= f.label :action %>
+<%= f.text_field :action, class: 'form-control' %>
+<br>
+<%= f.label :responsible %>
+<%= f.text_field :responsible, class: 'form-control' %>
+<br>
+<%= f.label :due_date %>
+<%= f.text_field :duedate, class: 'form-control' %>
+<br>
+<%= f.label :status %>
+<%= f.text_field :status, class: 'form-control' %>
+<br>
+
+<%= f.submit 'Save', class: 'btn btn-primary btn-block' %>
+<% end %>
+
+<%= link_to "Return To Do List Overview Page", todos_path %>
