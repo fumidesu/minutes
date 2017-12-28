@@ -18,4 +18,11 @@ class NoticeMailer < ApplicationMailer
     mail to: "fumilein23@yahoo.co.jp",
        subject: @minute.title
   end
+
+  def sendmail_todo(todo)
+    @todo = todo
+    @user = User.find(@todo.user_id)
+    mail to: todo.responsible,
+         subject: '<Reminder> A new action is required'
+  end
 end

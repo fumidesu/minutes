@@ -102,7 +102,7 @@ class MinutesController < ApplicationController
 
   def destroy
     @minute.destroy
-    redirect_to minutes_path, notice: "The minutes were deleted!"
+    redirect_to store_minutes_path, notice: "The minutes were deleted!"
   end
 
 

@@ -12,9 +12,10 @@ class TodosController < ApplicationController
 
   def create
     @todo = Todo.create(todos_params)
+    @todo.user_id = current_user.id
     if @todo.save
     redirect_to todos_path, notice: "A new action is required！"
-    #NoticeMailer.sendmail_todo(@todo).deliver
+    NoticeMailer.sendmail_todo(@todo).deliver
     else
       render 'new'
     end
