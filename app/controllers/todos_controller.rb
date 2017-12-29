@@ -27,6 +27,9 @@ class TodosController < ApplicationController
   def update
     if @todo.update(todos_params)
       redirect_to todos_path, notice: "The status was updated！"
+      if @todo.status == "closed"
+        NoticeMailer.sendmail_todo_update(@todo).deliver
+      end
     else
       render 'edit'
     end

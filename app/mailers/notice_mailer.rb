@@ -25,4 +25,12 @@ class NoticeMailer < ApplicationMailer
     mail to: todo.responsible,
          subject: '<Reminder> A new action is required'
   end
+
+  def sendmail_todo_update(todo)
+    @todo = todo
+    @user = User.find(@todo.user_id)
+    mail to: todo.responsible,
+         subject: '<Reminder> Your required action was completed'
+  end
+
 end
