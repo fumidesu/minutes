@@ -57,3 +57,4 @@ gem 'pry-rails'
 gem 'better_errors'
 gem 'rails_admin'
 gem 'cancan'
+gem 'whenever', require: false

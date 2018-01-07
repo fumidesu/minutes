@@ -33,4 +33,10 @@ class NoticeMailer < ApplicationMailer
          subject: '<Reminder> Your required action was completed'
   end
 
+  def sendmail_todo_reminder(todo)
+    @todo = todo
+    mail to: todo.responsible,
+    subject: '<Reminder> Your required action is still not completed'
+  end
+
 end
